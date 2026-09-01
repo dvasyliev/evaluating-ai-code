@@ -28,7 +28,10 @@ def power(a, b):
         raise ValueError("Cannot raise zero to a negative power.")
     if abs(b) > MAX_EXPONENT:
         raise ValueError("Exponent is out of range.")
-    return a ** b
+    try:
+        return a ** b
+    except OverflowError:
+        raise ValueError("Result is too large.")
 
 
 def square_root(a):
@@ -38,6 +41,8 @@ def square_root(a):
 
 
 def percentage(value, percent):
+    if percent < 0:
+        raise ValueError("Percent cannot be negative.")
     return value * percent / 100
 
 
@@ -93,4 +98,5 @@ def main():
         history.append(f"{name}: {result}")
 
 
-main()
+if __name__ == "__main__":
+    main()
