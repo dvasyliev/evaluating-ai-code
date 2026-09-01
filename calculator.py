@@ -1,20 +1,12 @@
 # calculator.py
 import math
+import operator
+from collections import deque
 
-history = []
+HISTORY_SIZE = 5
 MAX_EXPONENT = 100
 
-
-def add(a, b):
-    return a + b
-
-
-def subtract(a, b):
-    return a - b
-
-
-def multiply(a, b):
-    return a * b
+history = deque(maxlen=HISTORY_SIZE)
 
 
 def divide(a, b):
@@ -46,6 +38,24 @@ def percentage(value, percent):
     return value * percent / 100
 
 
+OPERATIONS = {
+    "1": ("Add", operator.add),
+    "2": ("Subtract", operator.sub),
+    "3": ("Multiply", operator.mul),
+    "4": ("Divide", divide),
+    "5": ("Power", power),
+    "6": ("Square root", square_root),
+    "7": ("Percentage", percentage),
+}
+
+SINGLE_OPERAND = {"6"}
+
+MENU = "\n".join(
+    [f"{key}. {name}" for key, (name, _) in OPERATIONS.items()]
+    + ["h. History   q. Quit"]
+)
+
+
 def read_number(label):
     raw = input(label).strip()
     if not raw:
@@ -53,47 +63,40 @@ def read_number(label):
     return float(raw)
 
 
-OPERATIONS = {
-    "1": ("Add", add, 2),
-    "2": ("Subtract", subtract, 2),
-    "3": ("Multiply", multiply, 2),
-    "4": ("Divide", divide, 2),
-    "5": ("Power", power, 2),
-    "6": ("Square root", square_root, 1),
-    "7": ("Percentage", percentage, 2),
-}
+def read_operands(choice):
+    labels = ["First number: "]
+    if choice not in SINGLE_OPERAND:
+        labels.append("Second number: ")
+    return [read_number(label) for label in labels]
+
+
+def format_history():
+    if not history:
+        return "No history yet."
+    return "\n".join(history)
 
 
 def main():
     while True:
-        for key, (name, _, _) in OPERATIONS.items():
-            print(f"{key}. {name}")
-        print("h. History   q. Quit")
-
+        print(MENU)
         choice = input("Choose: ").strip().lower()
+
         if choice == "q":
             break
         if choice == "h":
-            if not history:
-                print("No history yet.")
-            else:
-                print("\n".join(history[-5:]))
+            print(format_history())
             continue
         if choice not in OPERATIONS:
             print("Unknown option.")
             continue
 
-        name, func, arity = OPERATIONS[choice]
+        name, func = OPERATIONS[choice]
         try:
-            a = read_number("First number: ")
-            if arity == 2:
-                b = read_number("Second number: ")
-                result = func(a, b)
-            else:
-                result = func(a)
+            result = func(*read_operands(choice))
         except ValueError as e:
             print(f"Error: {e}")
             continue
+
         print(f"Result: {round(result, 2)}")
         history.append(f"{name}: {result}")
 

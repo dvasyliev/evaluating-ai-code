@@ -1,9 +1,10 @@
 # test_calculator.py
 import unittest
 
+from operator import add, sub as subtract, mul as multiply
+
 from calculator import (
-    add, subtract, multiply, divide, power,
-    square_root, percentage,
+    divide, power, square_root, percentage,
 )
 
 
