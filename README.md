@@ -6,13 +6,14 @@ This repository contains the Source Code for the 🧑🏻‍💻 [AI Code Review
 
 A small command-line calculator in Python, used as the subject of an AI code-review exercise. The repository contains both the application and the AI configuration (`CLAUDE.md`, rules and skills) that guide how an AI assistant works on it.
 
+<!-- COURSES:START -->
 # All My Courses
 
 #### Agentic AI Courses
 
 🎛️ [Harness Engineering: Modern AI Software Development Bootcamp](https://go.dvasyliev.com/harness-engineering)\
 🦞 [OpenClaw for Developers: AI Coding Crash Course](https://go.dvasyliev.com/openclaw)\
-🧑🏻‍💻 [AI Code Review: Evaluate Python Code with Confidence](https://go.dvasyliev.com/evaluating-ai-code)\
+🧑🏻‍💻 [AI Code Review: Evaluate Python Code with Confidence](https://go.dvasyliev.com/evaluating-ai-code)
 
 #### AI Tools Courses
 
@@ -48,6 +49,7 @@ A small command-line calculator in Python, used as the subject of an AI code-rev
 
 👣 [AI Agents with OpenAI AgentKit: Hands-On Guide](https://go.dvasyliev.com/agentkit)\
 💬 [ChatGPT for Developers: AI Coding Crash Course](https://go.dvasyliev.com/chatgpt)
+<!-- COURSES:END -->
 
 # How to use Code Examples from Github
 
